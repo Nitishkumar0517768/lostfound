@@ -15,6 +15,9 @@ const itemSchema = new mongoose.Schema({
   location: {
     type: String,
   },
+  image: {
+    type: String,
+  },
   date: {
     type: Date,
   },

@@ -3,7 +3,11 @@ const Item = require('../../models/Item');
 // Create a new item
 exports.createItem = async (req, res) => {
   try {
-    const item = await Item.create(req.body);
+    const itemData = { ...req.body };
+    if (req.file) {
+      itemData.image = req.file.filename;
+    }
+    const item = await Item.create(itemData);
     res.status(201).json({ success: true, data: item });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

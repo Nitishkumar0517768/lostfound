@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Camera, X } from 'lucide-react';
 
 const PostItem = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,8 @@ const PostItem = () => {
     type: 'lost',
     location: ''
   });
+  const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -15,15 +18,48 @@ const PostItem = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeImage = () => {
+    setImage(null);
+    setPreview(null);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
+
+    const data = new FormData();
+    data.append('title', formData.title);
+    data.append('description', formData.description);
+    data.append('type', formData.type);
+    data.append('location', formData.location);
+    if (image) {
+      data.append('image', image);
+    }
+
     try {
-      const res = await axios.post('http://localhost:5000/api/items', formData);
+      const res = await axios.post('http://localhost:5000/api/items', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       if (res.data.success) {
         setMessage('Item posted successfully!');
         setFormData({ title: '', description: '', type: 'lost', location: '' });
+        setImage(null);
+        setPreview(null);
       }
     } catch (error) {
       setMessage(`Error: ${error.response?.data?.message || error.message}`);
@@ -78,7 +114,7 @@ const PostItem = () => {
           )}
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-            {/* Type Selection (Radio Buttons for better UX) */}
+            {/* Type Selection */}
             <div className="mb-2">
               <label className="block mb-3 font-semibold text-gray-700 text-sm uppercase tracking-wider">
                 Item Type
@@ -162,6 +198,36 @@ const PostItem = () => {
                   required
                   className="w-full pl-10 p-3.5 rounded-xl border border-gray-300 bg-gray-50 text-gray-900 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all shadow-sm placeholder-gray-400"
                 />
+              </div>
+            </div>
+
+            <div className="group">
+              <label className="block mb-1.5 font-semibold text-gray-700 text-sm">Upload Image</label>
+              <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-xl hover:border-emerald-500 transition-colors bg-gray-50 overflow-hidden relative group/upload">
+                {preview ? (
+                  <div className="relative w-full h-40">
+                    <img src={preview} alt="Upload preview" className="w-full h-full object-contain" />
+                    <button
+                      type="button"
+                      onClick={removeImage}
+                      className="absolute top-0 right-0 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors shadow-lg"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-1 text-center">
+                    <Camera className="mx-auto h-12 w-12 text-gray-400 group-hover/upload:text-emerald-500 transition-colors" />
+                    <div className="flex text-sm text-gray-600">
+                      <label htmlFor="file-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-emerald-600 hover:text-emerald-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-emerald-500">
+                        <span>Upload a file</span>
+                        <input id="file-upload" name="image" type="file" className="sr-only" onChange={handleImageChange} accept="image/*" />
+                      </label>
+                      <p className="pl-1">or drag and drop</p>
+                    </div>
+                    <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                  </div>
+                )}
               </div>
             </div>
 

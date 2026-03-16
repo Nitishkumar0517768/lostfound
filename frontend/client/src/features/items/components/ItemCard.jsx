@@ -10,7 +10,6 @@ const ItemCard = ({ item, onClaimClick }) => {
       try {
         const res = await axios.get(`http://localhost:5000/api/claims/${item._id}`);
         if (res.data.success && res.data.data.length > 0) {
-          // Assuming we show the status of the most recent claim or just the fact that it has a claim
           setClaimStatus(res.data.data[0].status);
         }
       } catch (err) {
@@ -21,19 +20,32 @@ const ItemCard = ({ item, onClaimClick }) => {
   }, [item._id]);
 
   return (
-    <div className="bg-white shadow-lg hover:shadow-2xl border border-gray-100 rounded-xl p-6 transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group">
-      <div className="flex justify-between items-start mb-4 gap-4">
-        <h3 className="text-xl font-bold text-gray-900 flex-grow leading-tight group-hover:text-emerald-600 transition-colors">
-          {item.title}
-        </h3>
-        <span
-          className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex-shrink-0
-            ${item.type === 'lost'
-              ? 'bg-red-50 text-red-700 border border-red-200'
-              : 'bg-emerald-50 text-emerald-700 border border-emerald-200'}`}
-        >
-          {item.type}
-        </span>
+    <div className="bg-white shadow-lg hover:shadow-2xl border border-gray-100 rounded-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full group overflow-hidden">
+      {/* Item Image */}
+      <div className="h-48 w-full overflow-hidden bg-gray-100 relative">
+        <img
+          src={item.image ? `http://localhost:5000/uploads/${item.image}` : "https://images.unsplash.com/photo-1590374581308-444335606670?q=80&w=1470&auto=format&fit=crop"}
+          alt={item.title}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div className="absolute top-4 right-4">
+          <span
+            className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-sm
+              ${item.type === 'lost'
+                ? 'bg-red-500 text-white'
+                : 'bg-emerald-500 text-white'}`}
+          >
+            {item.type}
+          </span>
+        </div>
+      </div>
+
+      <div className="p-6 flex flex-col flex-grow">
+        <div className="flex justify-between items-start mb-4 gap-4">
+          <h3 className="text-xl font-bold text-gray-900 flex-grow leading-tight group-hover:text-emerald-600 transition-colors">
+            {item.title}
+          </h3>
+        </div>
       </div>
 
       <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3 flex-grow">
