@@ -16,6 +16,9 @@ app.get('/', (req, res) => {
   res.send('LostFound API running');
 });
 
+// Routes
+app.use('/api/items', require('./routes/items/itemRoutes'));
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
