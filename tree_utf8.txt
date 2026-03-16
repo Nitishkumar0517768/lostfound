@@ -1,0 +1,73 @@
+﻿Γö£ΓöÇΓöÇ backend
+Γöé   Γö£ΓöÇΓöÇ config
+Γöé   Γö£ΓöÇΓöÇ controllers
+Γöé   Γöé   Γö£ΓöÇΓöÇ auth
+Γöé   Γöé   Γö£ΓöÇΓöÇ claims
+Γöé   Γöé   ΓööΓöÇΓöÇ items
+Γöé   Γö£ΓöÇΓöÇ middleware
+Γöé   Γö£ΓöÇΓöÇ models
+Γöé   Γö£ΓöÇΓöÇ package-lock.json
+Γöé   Γö£ΓöÇΓöÇ package.json
+Γöé   Γö£ΓöÇΓöÇ routes
+Γöé   Γöé   Γö£ΓöÇΓöÇ auth
+Γöé   Γöé   Γö£ΓöÇΓöÇ claims
+Γöé   Γöé   ΓööΓöÇΓöÇ items
+Γöé   Γö£ΓöÇΓöÇ server.js
+Γöé   ΓööΓöÇΓöÇ utils
+Γö£ΓöÇΓöÇ frontend
+Γöé   ΓööΓöÇΓöÇ client
+Γöé       Γö£ΓöÇΓöÇ .gitignore
+Γöé       Γö£ΓöÇΓöÇ eslint.config.js
+Γöé       Γö£ΓöÇΓöÇ index.html
+Γöé       Γö£ΓöÇΓöÇ package-lock.json
+Γöé       Γö£ΓöÇΓöÇ package.json
+Γöé       Γö£ΓöÇΓöÇ postcss.config.js
+Γöé       Γö£ΓöÇΓöÇ public
+Γöé       Γöé   Γö£ΓöÇΓöÇ favicon.svg
+Γöé       Γöé   ΓööΓöÇΓöÇ icons.svg
+Γöé       Γö£ΓöÇΓöÇ README.md
+Γöé       Γö£ΓöÇΓöÇ src
+Γöé       Γöé   Γö£ΓöÇΓöÇ App.css
+Γöé       Γöé   Γö£ΓöÇΓöÇ App.jsx
+Γöé       Γöé   Γö£ΓöÇΓöÇ assets
+Γöé       Γöé   Γöé   Γö£ΓöÇΓöÇ hero.png
+Γöé       Γöé   Γöé   Γö£ΓöÇΓöÇ react.svg
+Γöé       Γöé   Γöé   ΓööΓöÇΓöÇ vite.svg
+Γöé       Γöé   Γö£ΓöÇΓöÇ components
+Γöé       Γöé   Γö£ΓöÇΓöÇ context
+Γöé       Γöé   Γö£ΓöÇΓöÇ features
+Γöé       Γöé   Γöé   Γö£ΓöÇΓöÇ auth
+Γöé       Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ components
+Γöé       Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ hooks
+Γöé       Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ services
+Γöé       Γöé   Γöé   Γöé   ΓööΓöÇΓöÇ utils
+Γöé       Γöé   Γöé   Γö£ΓöÇΓöÇ claims
+Γöé       Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ components
+Γöé       Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ hooks
+Γöé       Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ services
+Γöé       Γöé   Γöé   Γöé   ΓööΓöÇΓöÇ utils
+Γöé       Γöé   Γöé   Γö£ΓöÇΓöÇ items
+Γöé       Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ components
+Γöé       Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ hooks
+Γöé       Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ services
+Γöé       Γöé   Γöé   Γöé   ΓööΓöÇΓöÇ utils
+Γöé       Γöé   Γöé   Γö£ΓöÇΓöÇ search
+Γöé       Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ components
+Γöé       Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ hooks
+Γöé       Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ services
+Γöé       Γöé   Γöé   Γöé   ΓööΓöÇΓöÇ utils
+Γöé       Γöé   Γöé   ΓööΓöÇΓöÇ theme
+Γöé       Γöé   Γöé       Γö£ΓöÇΓöÇ components
+Γöé       Γöé   Γöé       Γö£ΓöÇΓöÇ hooks
+Γöé       Γöé   Γöé       Γö£ΓöÇΓöÇ services
+Γöé       Γöé   Γöé       ΓööΓöÇΓöÇ utils
+Γöé       Γöé   Γö£ΓöÇΓöÇ hooks
+Γöé       Γöé   Γö£ΓöÇΓöÇ index.css
+Γöé       Γöé   Γö£ΓöÇΓöÇ main.jsx
+Γöé       Γöé   Γö£ΓöÇΓöÇ pages
+Γöé       Γöé   Γö£ΓöÇΓöÇ services
+Γöé       Γöé   ΓööΓöÇΓöÇ utils
+Γöé       Γö£ΓöÇΓöÇ tailwind.config.js
+Γöé       ΓööΓöÇΓöÇ vite.config.js
+Γö£ΓöÇΓöÇ README.md
+ΓööΓöÇΓöÇ tree_output_final.txt
