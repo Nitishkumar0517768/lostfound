@@ -2,6 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
+const connectDB = require('./config/db');
+
+// Connect to Database
+connectDB();
 
 const app = express();
 
@@ -11,6 +15,10 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('LostFound API running');
 });
+
+// Routes
+const itemRoutes = require('./routes/items/itemRoutes');
+app.use('/api/items', itemRoutes);
 
 const PORT = process.env.PORT || 5000;
 
