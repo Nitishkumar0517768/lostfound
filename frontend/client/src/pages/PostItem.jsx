@@ -7,7 +7,9 @@ const PostItem = () => {
     title: '',
     description: '',
     type: 'lost',
-    location: ''
+    location: '',
+    college: '',
+    ownerName: ''
   });
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -45,6 +47,8 @@ const PostItem = () => {
     data.append('description', formData.description);
     data.append('type', formData.type);
     data.append('location', formData.location);
+    data.append('college', formData.college);
+    data.append('ownerName', formData.ownerName);
     if (image) {
       data.append('image', image);
     }
@@ -57,7 +61,7 @@ const PostItem = () => {
       });
       if (res.data.success) {
         setMessage('Item posted successfully!');
-        setFormData({ title: '', description: '', type: 'lost', location: '' });
+        setFormData({ title: '', description: '', type: 'lost', location: '', college: '', ownerName: '' });
         setImage(null);
         setPreview(null);
       }
@@ -134,6 +138,7 @@ const PostItem = () => {
                     checked={formData.type === 'lost'}
                     onChange={handleChange}
                     className="hidden"
+                    required
                   />
                   I Lost Something
                 </label>
@@ -151,6 +156,7 @@ const PostItem = () => {
                     checked={formData.type === 'found'}
                     onChange={handleChange}
                     className="hidden"
+                    required
                   />
                   I Found Something
                 </label>
@@ -199,6 +205,46 @@ const PostItem = () => {
                   className="w-full pl-10 p-3.5 rounded-xl border border-gray-300 bg-gray-50 text-gray-900 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all shadow-sm placeholder-gray-400"
                 />
               </div>
+            
+            <div className="group">
+              <label className="block mb-1.5 font-semibold text-gray-700 text-sm">College</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                  <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  name="college"
+                  placeholder="e.g., Engineering College"
+                  value={formData.college}
+                  onChange={handleChange}
+                  required
+                  className="w-full pl-10 p-3.5 rounded-xl border border-gray-300 bg-gray-50 text-gray-900 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all shadow-sm placeholder-gray-400"
+                />
+              </div>
+            </div>
+
+            <div className="group">
+              <label className="block mb-1.5 font-semibold text-gray-700 text-sm">Owner Name</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                  <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  name="ownerName"
+                  placeholder="Your full name"
+                  value={formData.ownerName}
+                  onChange={handleChange}
+                  required
+                  className="w-full pl-10 p-3.5 rounded-xl border border-gray-300 bg-gray-50 text-gray-900 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all shadow-sm placeholder-gray-400"
+                />
+              </div>
+            </div>
             </div>
 
             <div className="group">
@@ -221,7 +267,7 @@ const PostItem = () => {
                     <div className="flex text-sm text-gray-600">
                       <label htmlFor="file-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-emerald-600 hover:text-emerald-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-emerald-500">
                         <span>Upload a file</span>
-                        <input id="file-upload" name="image" type="file" className="sr-only" onChange={handleImageChange} accept="image/*" />
+                        <input id="file-upload" name="image" type="file" className="sr-only" onChange={handleImageChange} accept="image/*" required />
                       </label>
                       <p className="pl-1">or drag and drop</p>
                     </div>

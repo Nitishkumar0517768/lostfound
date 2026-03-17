@@ -26,6 +26,9 @@ exports.getItems = async (req, res) => {
     if (type) {
       query.type = type;
     }
+    if (req.query.college) {
+      query.college = { $regex: req.query.college, $options: 'i' };
+    }
 
     const pageNum = parseInt(page, 10);
     const limitNum = parseInt(limit, 10);

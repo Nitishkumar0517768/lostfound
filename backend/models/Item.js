@@ -18,8 +18,14 @@ const itemSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  college: {
+    type: String,
+  },
   date: {
     type: Date,
+  },
+  ownerName: {
+    type: String,
   },
   status: {
     type: String,

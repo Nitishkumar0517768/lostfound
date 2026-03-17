@@ -13,6 +13,8 @@ const Items = () => {
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [type, setType] = useState('');
+  const [college, setCollege] = useState('');
+  const [debouncedCollege, setDebouncedCollege] = useState('');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -33,6 +35,15 @@ const Items = () => {
     return () => clearTimeout(timer);
   }, [search]);
 
+  // Debounce College input
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedCollege(college);
+      setPage(1);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [college]);
+
   // Reset to first page when type changes
   useEffect(() => {
     setPage(1);
@@ -45,6 +56,7 @@ const Items = () => {
         params: {
           search: debouncedSearch,
           type,
+          college: debouncedCollege,
           page,
           limit: 12
         }
@@ -62,14 +74,14 @@ const Items = () => {
 
   useEffect(() => {
     fetchItems();
-  }, [debouncedSearch, type, page]);
+  }, [debouncedSearch, type, debouncedCollege, page]);
 
   const handlePrev = () => setPage(p => Math.max(1, p - 1));
   const handleNext = () => setPage(p => Math.min(totalPages, p + 1));
 
   // Handle claiming sequence
   const handleClaimClick = (item) => {
-    // Basic Auth verification
+    // Basic Auth verification - Check for token or user object in localStorage
     const token = localStorage.getItem('token') || localStorage.getItem('user');
     if (!token) {
       navigate('/login');
@@ -158,6 +170,21 @@ const Items = () => {
               <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
             </div>
           </div>
+
+          <div className="sm:w-64 relative group">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <svg className="h-5 w-5 text-gray-400 group-focus-within:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2-2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <input 
+              type="text" 
+              placeholder="Filter by college..." 
+              value={college}
+              onChange={(e) => setCollege(e.target.value)}
+              className="w-full pl-11 p-3.5 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"
+            />
+          </div>
         </div>
 
         {/* Content Area */}
@@ -175,8 +202,8 @@ const Items = () => {
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">No items found</h3>
                 <p className="text-gray-500 max-w-md mx-auto">We couldn't find anything matching your current filters. Try adjusting your search or clearing the filters.</p>
-                {(search || type) && (
-                  <button onClick={() => { setSearch(''); setType(''); }} className="mt-6 text-emerald-600 font-semibold hover:underline">
+                {(search || type || college) && (
+                  <button onClick={() => { setSearch(''); setType(''); setCollege(''); }} className="mt-6 text-emerald-600 font-semibold hover:underline">
                     Clear all filters
                   </button>
                 )}
@@ -296,6 +323,7 @@ const Items = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };
