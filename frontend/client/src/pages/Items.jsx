@@ -81,7 +81,7 @@ const Items = () => {
 
   // Handle claiming sequence
   const handleClaimClick = (item) => {
-    // Basic Auth verification
+    // Basic Auth verification - Check for token or user object in localStorage
     const token = localStorage.getItem('token') || localStorage.getItem('user');
     if (!token) {
       navigate('/login');
@@ -323,6 +323,7 @@ const Items = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };

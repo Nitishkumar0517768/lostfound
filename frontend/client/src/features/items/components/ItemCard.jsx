@@ -10,6 +10,7 @@ const ItemCard = ({ item, onClaimClick }) => {
       try {
         const res = await axios.get(`http://localhost:5000/api/claims/${item._id}`);
         if (res.data.success && res.data.data.length > 0) {
+          // Assuming we show the status of the most recent claim or just the fact that it has a claim
           setClaimStatus(res.data.data[0].status);
         }
       } catch (err) {
