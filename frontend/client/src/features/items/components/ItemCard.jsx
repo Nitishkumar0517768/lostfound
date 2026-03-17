@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../../services/api';
 
 const ItemCard = ({ item, onClaimClick }) => {
   const [claimStatus, setClaimStatus] = useState(null);
@@ -8,7 +8,7 @@ const ItemCard = ({ item, onClaimClick }) => {
   useEffect(() => {
     const fetchClaims = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/claims/${item._id}`);
+        const res = await api.get(`/api/claims/${item._id}`);
         if (res.data.success && res.data.data.length > 0) {
           // Assuming we show the status of the most recent claim or just the fact that it has a claim
           setClaimStatus(res.data.data[0].status);
@@ -24,7 +24,7 @@ const ItemCard = ({ item, onClaimClick }) => {
   const getImageUrl = (image) => {
     if (!image) return "https://images.unsplash.com/photo-1590374581308-444335606670?q=80&w=1470&auto=format&fit=crop";
     if (image.startsWith('http')) return image;
-    return `http://localhost:5000/uploads/${image}`;
+    return `/uploads/${image}`;
   };
 
   return (

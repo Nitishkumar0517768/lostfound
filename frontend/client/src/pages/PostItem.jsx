@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import { Camera, X } from 'lucide-react';
 
 const PostItem = () => {
@@ -54,7 +54,7 @@ const PostItem = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:5000/api/items', data, {
+      const res = await api.post('/api/items', data, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
